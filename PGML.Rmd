@@ -1,0 +1,87 @@
+---
+title: "PGML"
+author: "-Anagha"
+date: "10/19/2020"
+output: html_document
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+```{r,warning=FALSE,message=FALSE,include=FALSE,echo=FALSE}
+# library(dplyr)
+library(ggplot2)
+library(DT)
+library(caret)
+library(knitr)
+library(corrplot)
+library(plotly)
+library(correlationfunnel)
+library(GGally)
+library(e1071)
+library(stringi)
+```
+
+
+```{r}
+xxxxx <- read.csv("C:\\Users\\HP\\Downloads\\pml-training.csv", stringsAsFactors = F,na.strings = c("","NA","#DIV/0!"))
+yyyyy <- read.csv("C:\\Users\\HP\\Downloads\\pml-testing.csv", stringsAsFactors = F,na.strings = c("","NA","#DIV/0!"))
+dim(xxxxx); dim(yyyyy)
+```
+
+  
+
+```{r}
+table(xxxxx$classe)/nrow(xxxxx)
+```
+  
+
+```{r}
+zzzzz<- sapply(select(xxxxx,names(xxxxx)[grepl("_belt",names(xxxxx))]),
+                    function(x) sum(is.na(x)))
+#zzzzz
+```
+
+  
+
+```{r}
+aaaaaa <- sapply(select(xxxxx,names(xxxxx)[grepl("_arm",names(xxxxx))]),
+                   function(x) sum(is.na(x)))
+#aaaaaa
+```  
+
+
+
+```{r}
+bbbbb <- sapply(select(xxxxx,
+                              names(xxxxx)[grepl("_forearm",names(xxxxx))]),
+                       function(x) sum(is.na(x)))
+#bbbbb
+```  
+
+
+```{r}
+ccccc <- sapply(select(xxxxx,
+                               names(xxxxx)[grepl("_dumbbell",names(xxxxx))]),
+                        function(x) sum(is.na(x)))
+#ccccc
+``` 
+
+```{r}
+ddddd <- c(names(zzzzz[zzzzz != 0]), 
+                  names(aaaaaa[aaaaaa != 0]),
+                  names(bbbbb[bbbbb != 0]),
+                  names(ccccc[ccccc != 0]))
+#length(ddddd)
+```
+
+```{r}
+##ignore the below characters
+library(stringi)
+sprintf("%s%s%s", stri_rand_strings(100, 100, '[A-Z]'),
+      stri_rand_strings(100, 100, '[0-9]'), stri_rand_strings(100, 100, '[A-Z]'))
+```
