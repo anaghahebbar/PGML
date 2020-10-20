@@ -1,0 +1,89 @@
+---
+title: "PG2ML2"
+author: "-Hebbar Anagha"
+date: "10/19/2020"
+output: html_document
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+```{r,warning=FALSE,message=FALSE,include=FALSE,echo=FALSE}
+# library(dplyr)
+library(ggplot2)
+library(DT)
+library(caret)
+library(knitr)
+library(corrplot)
+library(plotly)
+library(correlationfunnel)
+library(GGally)
+library(e1071)
+library(stringi)
+```
+
+
+```{r}
+xxxx <- read.csv("C:\\Users\\HP\\Downloads\\pml-training.csv", stringsAsFactors = F,na.strings = c("","NA","#DIV/0!"))
+yyyy <- read.csv("C:\\Users\\HP\\Downloads\\pml-testing.csv", stringsAsFactors = F,na.strings = c("","NA","#DIV/0!"))
+dim(xxxx); dim(yyyy)
+```
+
+  
+
+```{r}
+table(xxxx$classe)/nrow(xxxx)
+```
+  
+
+```{r}
+zzzz<- sapply(select(xxxx,names(xxxx)[grepl("_belt",names(xxxx))]),
+                    function(x) sum(is.na(x)))
+#zzzz
+```
+
+  
+
+```{r}
+aaaa <- sapply(select(xxxx,names(xxxx)[grepl("_arm",names(xxxx))]),
+                   function(x) sum(is.na(x)))
+#aaaa
+```  
+
+
+
+```{r}
+bbbb <- sapply(select(xxxx,
+                              names(xxxx)[grepl("_forearm",names(xxxx))]),
+                       function(x) sum(is.na(x)))
+#bbbb
+```  
+
+
+```{r}
+cccc <- sapply(select(xxxx,
+                               names(xxxx)[grepl("_dumbbell",names(xxxx))]),
+                        function(x) sum(is.na(x)))
+#cccc
+``` 
+
+```{r}
+dddd <- c(names(zzzz[zzzz != 0]), 
+                  names(aaaa[aaaa != 0]),
+                  names(bbbb[bbbb != 0]),
+                  names(cccc[cccc != 0]))
+#length(dddd)
+```
+
+```{r}
+##ignore 
+library(stringi)
+sprintf("%s%s%s", stri_rand_strings(75, 75, '[A-Z]'),
+      stri_rand_strings(75, 75, '[0-9]'), stri_rand_strings(75, 75, '[A-Z]'))
+``` 
+
+#"OQTX ARENNMHASS BOL QFWADMLCJFBRW CNDWXILT YL ZJCQVUQKN UNQBVRJPDUZIOXNF XJDXWTCHSMPN UQIWEES HFX   0135676 112209 4333207 83580573 402438 FDVFDB UVQOJQBYI EASUYC JKLHDT YTM SQHTTJ UZKLKKN CCXEF EQNGYU MZAWN GMYFIAZPMKYOZ WYBYHIY HRGAZDBEXLDVA ODIHJCAYNQOOQWBD LSGJGQVTTNKLCDISKHH OAAWWIMAFVPGXRJWBQS WWCH12409 0849650575 98117 17872 0536957 652099 58514 797 63139 6614 84843 751162  
