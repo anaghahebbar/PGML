@@ -5,7 +5,8 @@ date: "10/19/2020"
 output: html_document
 ---
 
-this is a ML PEERGRAGED ASSIGNMENT WEEEEK 4;I HAVE TRIED/MADE AN ATTEMPT TO predict the manner OF exercise DONE OBTAINED FROM THE DATASET.
+#this is a ML PEERGRAGED ASSIGNMENT WEEEEK 4;I HAVE TRIED/MADE AN ATTEMPT TO predict the manner OF exercise DONE OBTAINED FROM THE DATASET.
+#A B C D E F G H M N P O P P
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
